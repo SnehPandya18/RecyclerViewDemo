@@ -5,8 +5,8 @@
     <data class="ItemAB">
 
         <variable
-            name="movies"
-            type="com.snehpandya.recyclerviewdemo.data.Movies"/>
+            name="result"
+            type="com.snehpandya.recyclerviewdemo.data.Result"/>
 
     </data>
 
@@ -15,12 +15,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textview"
+        <ImageView
+            android:id="@+id/imageview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="1dp"
+            android:src="@{result.posterPath}"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            tools:text="@{movies.movie}"/>
+            tools:src="@mipmap/ic_launcher"/>
     </LinearLayout>
 </layout>

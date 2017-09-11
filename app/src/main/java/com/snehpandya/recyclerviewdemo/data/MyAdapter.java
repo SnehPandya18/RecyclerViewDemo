@@ -1,12 +1,15 @@
 package com.snehpandya.recyclerviewdemo.data;
 
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.snehpandya.recyclerviewdemo.R;
 import com.snehpandya.recyclerviewdemo.databinding.ItemAB;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -16,10 +19,10 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    private List<Movies> movies;
+    private List<Result> mResults;
 
-    public MyAdapter(List<Movies> movies) {
-        this.movies = movies;
+    public MyAdapter(List<Result> results) {
+        this.mResults = results;
     }
 
     @Override
@@ -31,12 +34,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
-        holder.bindMovies(movies.get(position));
+        holder.bindResult(mResults.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return mResults.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -47,9 +50,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             this.binding = binding;
         }
 
-        void bindMovies(Movies movies) {
-            binding.setMovies(movies);
+        void bindResult(Result result) {
+            binding.setResult(result);
             binding.executePendingBindings();
         }
+    }
+
+    @BindingAdapter({"android:src"})
+    public static void loadImage(ImageView imageView, String url) {
+        String IMAGE_URL = "http://image.tmdb.org/t/p/w342";
+        Picasso.with(imageView.getContext()).load(IMAGE_URL + url).into(imageView);
+        imageView.setAdjustViewBounds(true);
     }
 }

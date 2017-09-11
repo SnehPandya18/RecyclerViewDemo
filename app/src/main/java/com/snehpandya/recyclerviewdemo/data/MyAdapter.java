@@ -1,13 +1,17 @@
 package com.snehpandya.recyclerviewdemo.data;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.snehpandya.recyclerviewdemo.R;
+import com.snehpandya.recyclerviewdemo.activity.DetailActivity;
 import com.snehpandya.recyclerviewdemo.databinding.ItemAB;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyAdapter.MyViewHolder holder, final int position) {
         holder.bindResult(mResults.get(position));
     }
 
@@ -53,6 +57,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         void bindResult(Result result) {
             binding.setResult(result);
             binding.executePendingBindings();
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Context c = v.getContext();
+                    Intent intent = new Intent(c, DetailActivity.class);
+                    intent.putExtra("movie", mResults.get(position));
+                    c.startActivity(intent);
+                }
+            });
         }
     }
 

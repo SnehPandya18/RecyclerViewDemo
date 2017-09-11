@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.snehpandya.recyclerviewdemo.R;
@@ -42,23 +41,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Please check your connection!", Toast.LENGTH_SHORT).show();
         }
-
-        binding.recyclerview.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
     }
 
     private void fillData(int page) {

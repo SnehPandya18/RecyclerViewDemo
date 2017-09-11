@@ -1,33 +1,33 @@
 package com.snehpandya.recyclerviewdemo.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.snehpandya.recyclerviewdemo.R;
 import com.snehpandya.recyclerviewdemo.data.Movies;
 import com.snehpandya.recyclerviewdemo.data.MyAdapter;
+import com.snehpandya.recyclerviewdemo.databinding.MainAB;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView mRecyclerView;
+    private MainAB binding;
+
     List<Movies> movies;
     MyAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         fillData();
 
         mAdapter = new MyAdapter(movies);
-        mRecyclerView.setAdapter(mAdapter);
+        binding.recyclerview.setAdapter(mAdapter);
     }
 
     private void fillData() {

@@ -1,12 +1,13 @@
 package com.snehpandya.recyclerviewdemo.data;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.snehpandya.recyclerviewdemo.R;
+import com.snehpandya.recyclerviewdemo.databinding.ItemAB;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
-        holder.mTextView.setText(movies.get(position).getMovie());
+        holder.bindMovies(movies.get(position));
     }
 
     @Override
@@ -39,11 +40,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextView;
+        private ItemAB binding;
 
         MyViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.textview);
+            binding = DataBindingUtil.bind(itemView);
+        }
+
+        void bindMovies(Movies movies) {
+            binding.setMovies(movies);
         }
     }
 }

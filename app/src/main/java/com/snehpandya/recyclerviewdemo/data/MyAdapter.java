@@ -3,7 +3,6 @@ package com.snehpandya.recyclerviewdemo.data;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.snehpandya.recyclerviewdemo.R;
@@ -25,8 +24,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        return new MyViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ItemAB binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, parent, false);
+        return new MyViewHolder(binding);
     }
 
     @Override
@@ -42,13 +42,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ItemAB binding;
 
-        MyViewHolder(View itemView) {
-            super(itemView);
-            binding = DataBindingUtil.bind(itemView);
+        MyViewHolder(ItemAB binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bindMovies(Movies movies) {
             binding.setMovies(movies);
+            binding.executePendingBindings();
         }
     }
 }
